@@ -2,23 +2,19 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import f1_score
 from sklearn.metrics import confusion_matrix
+from sklearn import model_selection
 import matplotlib.pyplot as plt
 import seaborn as sns
 class KNNTrainer:
-    def __init__(self, dataBase,n_neighbors=5):
+    def __init__(self, dataBase):
         knn = KNeighborsClassifier()
-        knn.fit(dataBase.X_train, dataBase.Y_train)
-        y_pred = knn.predict(dataBase.X_test)
-
-        accuracy_knn = accuracy_score(dataBase.Y_test, y_pred)
-        f1_knn = f1_score(dataBase.Y_test, y_pred)
-        self.matrix = confusion_matrix(dataBase.Y_test, y_pred)
-        self.printConfusionMatrix()
-        print(accuracy_knn, f1_knn)
+        scores = model_selection.cross_val_score(knn, dataBase.X, dataBase.Y, cv=10, scoring='accuracy')
+        print("Acurácia média:", scores.mean())
+        print("Desvio padrão:", scores.std())
         
     def printConfusionMatrix(self):
         # Configura as labels dos eixos x e y
-        labels = ['0', '1']
+        labels = [0, 1]
         sns.set(font_scale=1.4)
         sns.heatmap(self.matrix, annot=True, cmap='Blues', xticklabels=labels, yticklabels=labels)
 
