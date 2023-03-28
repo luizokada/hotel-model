@@ -12,7 +12,9 @@ data = BaseSpliter(data_base_to_knn.data)
 
 
 
-#analytic = DbAnalyser(data_base)
+analytic = DbAnalyser(data_base)
+
+
 number_of_neighbors = [1,3,5,7,9]
 type_of_weight = ['uniform', 'distance']
 for neighbors in number_of_neighbors:
