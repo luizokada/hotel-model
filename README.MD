@@ -1,5 +1,5 @@
 # Modelos para previsão de reserva de Hotel
-
+Modelos de aprendizagem de máquina para prever se a reserva de um hotel vai ser cancelada ou não, 
 ## Dependencias
 
 Esse prójeto possui algumas dependencia elas são:
@@ -19,4 +19,16 @@ pip install pandas
 pip install -U matplotlib
 pip install plotly
 pip install numpy
+```
+## Banco de Dados
+
+O banco de dados pode ser encontrado <a href="https://www.kaggle.com/datasets/ahsan81/hotel-reservations-classification-dataset" target="_blank">aqui</a>
+
+##
+
+Para executar o cigo basta executar o comando:
+
+```
+python3 ./main.py
+
 ```
