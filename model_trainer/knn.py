@@ -2,7 +2,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import f1_score
 from sklearn.metrics import confusion_matrix
-from sklearn.model_selection import cross_val_predict
+from sklearn.model_selection import StratifiedKFold, cross_val_predict
 from sklearn.metrics import confusion_matrix
 from sklearn import model_selection
 import matplotlib.pyplot as plt
@@ -11,8 +11,9 @@ import numpy as np
 class KNNTrainer:
     def __init__(self, dataBase,n_neighbors, weights):
         self.knn = KNeighborsClassifier(weights=weights,n_neighbors=n_neighbors)
+        self.cv = StratifiedKFold(n_splits=10)
         self.scores = model_selection.cross_val_score(self.knn, dataBase.X, dataBase.Y, cv=10, scoring='accuracy')
-        self.y_pred = cross_val_predict(self.knn, dataBase.X, dataBase.Y ,cv=10)
+        self.y_pred = cross_val_predict(self.knn, dataBase.X, dataBase.Y ,cv=self.cv)
         self.conf_mat = confusion_matrix(dataBase.Y, self.y_pred)
         class_names = np.array(['0', '1'])
         fig, ax = plt.subplots(figsize=(8, 6))
