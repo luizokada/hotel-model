@@ -1,14 +1,14 @@
-### Modelos para previsão de reserva de Hotel
+# Modelos para previsão de reserva de Hotel
 
-# Dependencias
+## Dependencias
 
 Esse prójeto possui algumas dependencia elas são:
 
-*Sklearn
-*Matplotlib
-*Pandas
-*Plotly
-*Numpy
+* Sklearn
+* Matplotlib
+* Pandas
+* Plotly
+* Numpy
 
 
 Para Instalar elas Use o pip 
