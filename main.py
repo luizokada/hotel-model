@@ -9,5 +9,16 @@ data_base_to_knn = ConverterDataToKNN(data_base)
 
 data = BaseSpliter(data_base_to_knn.data)
 
-knn = KNNTrainer(data)
+
+number_of_neighbors = [1,3,5,7,9]
+type_of_weight = ['uniform', 'distance']
+for neighbors in number_of_neighbors:
+    for weight in type_of_weight:
+        print("Número de vizinhos: ", neighbors)
+        print("Tipo de peso: ", weight)
+        knn = KNNTrainer(data, neighbors, weight)
+        print("Acurácia média:", knn.scores.mean())
+        print("Desvio padrão:", knn.scores.std())
+        print("Matriz de confusão:")
+        print("---------------------------------------------------------")
 

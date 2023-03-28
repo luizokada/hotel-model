@@ -6,22 +6,8 @@ from sklearn import model_selection
 import matplotlib.pyplot as plt
 import seaborn as sns
 class KNNTrainer:
-    def __init__(self, dataBase):
-        knn = KNeighborsClassifier()
-        scores = model_selection.cross_val_score(knn, dataBase.X, dataBase.Y, cv=10, scoring='accuracy')
-        print("Acurácia média:", scores.mean())
-        print("Desvio padrão:", scores.std())
+    def __init__(self, dataBase,n_neighbors, weights):
+        self.knn = KNeighborsClassifier(weights=weights,n_neighbors=n_neighbors)
+        self.scores = model_selection.cross_val_score(self.knn, dataBase.X, dataBase.Y, cv=10, scoring='accuracy')
         
-    def printConfusionMatrix(self):
-        # Configura as labels dos eixos x e y
-        labels = [0, 1]
-        sns.set(font_scale=1.4)
-        sns.heatmap(self.matrix, annot=True, cmap='Blues', xticklabels=labels, yticklabels=labels)
-
-        # Configura o título do gráfico e dos eixos
-        plt.xlabel('Previsão')
-        plt.ylabel('Valor Real')
-        plt.title('Matriz de Confusão')
-
-        # Exibe o gráfico
-        plt.show()
+        
