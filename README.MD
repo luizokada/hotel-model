@@ -24,9 +24,10 @@ pip install numpy
 
 O banco de dados pode ser encontrado <a href="https://www.kaggle.com/datasets/ahsan81/hotel-reservations-classification-dataset" target="_blank">aqui</a>
 
-##
+## Execução
 
 Para executar o cigo basta executar o comando:
+
 
 ```
 python3 ./main.py
