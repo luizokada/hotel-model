@@ -12,7 +12,7 @@ class KNNTrainer:
     def __init__(self, dataBase,n_neighbors, weights):
         self.knn = KNeighborsClassifier(weights=weights,n_neighbors=n_neighbors)
         self.cv = StratifiedKFold(n_splits=10)
-        self.scores = model_selection.cross_val_score(self.knn, dataBase.X, dataBase.Y, cv=self.cv, scoring='accuracy')
+        self.scores = model_selection.cross_val_score(self.knn, dataBase.X, dataBase.Y, cv=self.cv, scoring='f1')
         self.y_pred = cross_val_predict(self.knn, dataBase.X, dataBase.Y ,cv=self.cv)
         self.conf_mat = confusion_matrix(dataBase.Y, self.y_pred)
         class_names = np.array(['0', '1'])
@@ -21,4 +21,4 @@ class KNNTrainer:
         ax.set_xlabel('Predicted labels')
         ax.set_ylabel('True labels')
         ax.set_title('Confusion Matrix n={} w={}'.format(n_neighbors, weights))
-        plt.show()
+    
