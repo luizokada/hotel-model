@@ -26,10 +26,18 @@ O banco de dados pode ser encontrado <a href="https://www.kaggle.com/datasets/ah
 
 ## Execução
 
-Para executar o cigo basta executar o comando:
+Para executar o código para a análise de dados basta executar o comando:
 
 
 ```
-python3 ./main.py
+python3 ./main.py analytic
+
+```
+
+Para executar o código para executar o KNN basta executar o comando:
+
+
+```
+python3 ./main.py knn
 
 ```
