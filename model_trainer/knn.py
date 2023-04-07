@@ -21,4 +21,4 @@ class KNNTrainer:
         ax.set_xlabel('Predicted labels')
         ax.set_ylabel('True labels')
         ax.set_title('Confusion Matrix n={} w={}'.format(n_neighbors, weights))
-    
+        plt.show()
