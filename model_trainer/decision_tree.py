@@ -1,14 +1,25 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.svm import SVC
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import StratifiedKFold, cross_val_predict
 from sklearn.metrics import confusion_matrix
 from sklearn import model_selection
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import f1_score
 
-class SVMTrainer:
+class DTTrainer:
     def __init__(self, dataBase) -> None:
-        self.svm = SVC()
+        # svc = SVC()
+        # svc.fit(X_train, y_train)
+        # y_pred = svc.predict(X_test)
+
+        # accuracy_svc = accuracy_score(y_test, y_pred)
+        # f1_svc = f1_score(y_test, y_pred)
+
+        # print(accuracy_svc, f1_svc)
+        print("Treinando DT...")
+        self.svm = DecisionTreeClassifier()
         self.cv = StratifiedKFold(n_splits=10)
         self.scores = model_selection.cross_val_score(self.svm, dataBase.X, dataBase.Y, cv=self.cv, scoring='f1')
         self.y_pred = cross_val_predict(self.svm, dataBase.X, dataBase.Y ,cv=self.cv)

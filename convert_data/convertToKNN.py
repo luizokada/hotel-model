@@ -1,5 +1,3 @@
-import matplotlib.pyplot as plt
-import numpy as np
 class ConverterDataToKNN:
     def __init__(self, data):
         self.data = data.drop('Booking_ID', axis=1)

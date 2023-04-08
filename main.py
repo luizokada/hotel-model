@@ -1,7 +1,8 @@
 import pandas as pd
 from convert_data.convertToKNN import ConverterDataToKNN 
 from model_trainer.knn import KNNTrainer
-from bases.baseSpliter import BaseSpliter
+from model_trainer.decision_tree import DTTrainer
+from bases.baseSpliter import BaseSpliter, SVMBaseSpliter
 from db_analysis.analytic import DbAnalyser
 import matplotlib.pyplot as plt
 import sys
@@ -9,17 +10,7 @@ import sys
 def main():
     
     arg = sys.argv[1]
-    
     data_base = pd.read_csv('./db/HotelReservations.csv')
-
-    #Transforma a base de dados em uma base de dados para o KNN convertendo as variáveis categóricas em variáveis numéricas
-    data_base_to_knn = ConverterDataToKNN(data_base)
-    db_to_svn = ConverterDataToKNN(data_base)
-
-
-    #Divide a Base de Dados
-    data_knn = BaseSpliter(data_base_to_knn.data)
-    data_svn = BaseSpliter(db_to_svn.data)
 
     if(arg == 'analytic'):
         
@@ -27,6 +18,13 @@ def main():
         analytic = DbAnalyser(data_base)
         
     elif(arg == 'knn'):
+        #Transforma a base de dados em uma base de dados para o KNN convertendo as variáveis categóricas em variáveis numéricas
+        print("KNN escolhido")
+        data_base_to_knn = ConverterDataToKNN(data_base)
+
+        #Divide a Base de Dados
+        data_knn = BaseSpliter(data_base_to_knn.data)
+
         #treina o KNN
         number_of_neighbors = [1,3,5,7,9,11,13]
         f1_scores = [[],[]]
@@ -66,9 +64,15 @@ def main():
                 
         print("F1_Score médio uniform:", f1_scores[0])
         print("F1_Score médio distance:", f1_scores[1])
-    elif (arg == 'svm'):
-        #treina o SVM
-        print("SVM")
+    elif (arg == 'dt'):
+        print("DT escolhido")
+        data_base_to_dt = ConverterDataToKNN(data_base)
+        data = SVMBaseSpliter(data_base_to_dt.data)
+        dt = DTTrainer(data)
+
+        print("F1_Score médio:", dt.scores.mean())
+        print("Desvio padrão:", dt.scores.std())
+        print("Matriz de confusão:")
     else:
         print("ARGUMENTO INVÁLIDO!")
 
