@@ -1,14 +1,10 @@
-import matplotlib.pyplot as plt
-import numpy as np
-class ConverterDataToKNN:
+class ConvertData:
     def __init__(self, data):
         self.data = data.drop('Booking_ID', axis=1)
         self.data['type_of_meal_plan'] = self.data.apply(self.meal_plan_convert, axis=1)
         self.data['room_type_reserved'] = self.data.apply(self.room_type_convert, axis=1)
         self.data['market_segment_type'] = self.data.apply(self.market_segment_convert, axis=1)
         self.data['booking_status'] = self.data.apply(self.booking_status_convert, axis=1)
-
-                
 
     def meal_plan_convert(self,row):
         if row.type_of_meal_plan == 'Not Selected':

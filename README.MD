@@ -14,11 +14,7 @@ Esse prójeto possui algumas dependencia elas são:
 Para Instalar elas Use o pip 
 
 ```
-pip install -U scikit-learn
-pip install pandas
-pip install -U matplotlib
-pip install plotly
-pip install numpy
+pip install -r requirements.txt
 ```
 ## Banco de Dados
 
@@ -43,10 +39,10 @@ python3 ./main.py knn
 ```
 
 
-Para executar o código com o SVM basta digitar o comando:
+Para executar o código com Decision Tree basta digitar o comando:
 
 
 ```
-python3 ./main.py svm
+python3 ./main.py dt
 
 ```
