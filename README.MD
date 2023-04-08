@@ -14,11 +14,7 @@ Esse prójeto possui algumas dependencia elas são:
 Para Instalar elas Use o pip 
 
 ```
-pip install -U scikit-learn
-pip install pandas
-pip install -U matplotlib
-pip install plotly
-pip install numpy
+pip install -r requirements.txt
 ```
 ## Banco de Dados
 
