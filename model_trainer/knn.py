@@ -8,6 +8,7 @@ from sklearn import model_selection
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
+
 class KNNTrainer:
     def __init__(self, dataBase,n_neighbors, weights):
         self.knn = KNeighborsClassifier(weights=weights,n_neighbors=n_neighbors)
