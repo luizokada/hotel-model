@@ -1,4 +1,4 @@
-class ConverterDataToKNN:
+class ConvertData:
     def __init__(self, data):
         self.data = data.drop('Booking_ID', axis=1)
         self.data['type_of_meal_plan'] = self.data.apply(self.meal_plan_convert, axis=1)

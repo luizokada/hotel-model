@@ -1,5 +1,5 @@
 import pandas as pd
-from convert_data.convertToKNN import ConverterDataToKNN 
+from convert_data.convertData import ConvertData 
 from model_trainer.knn import KNNTrainer
 from model_trainer.decision_tree import DTTrainer
 from bases.baseSpliter import BaseSpliter, SVMBaseSpliter
@@ -20,7 +20,7 @@ def main():
     elif(arg == 'knn'):
         #Transforma a base de dados em uma base de dados para o KNN convertendo as variáveis categóricas em variáveis numéricas
         print("KNN escolhido")
-        data_base_to_knn = ConverterDataToKNN(data_base)
+        data_base_to_knn = ConvertData(data_base)
 
         #Divide a Base de Dados
         data_knn = BaseSpliter(data_base_to_knn.data)
@@ -41,6 +41,7 @@ def main():
                 print("Desvio padrão:", knn.scores.std())
                 print("Matriz de confusão:")
                 print("---------------------------------------------------------")
+                knn.plot()
                 i+=1
                 
         plt.show()
@@ -48,12 +49,11 @@ def main():
         j = f1_scores[0]
         k = f1_scores[1]
 
-        plt.plot( number_of_neighbors,j)
+        plt.plot(number_of_neighbors,j)
         plt.title('F1_Score médio W = uniform')
         plt.ylabel('F1_Score')
         plt.xlabel('N neighbors')
         plt.show()
-
 
         plt.plot(number_of_neighbors,k)
         plt.title('F1_Score médio W = Distance')
@@ -66,13 +66,14 @@ def main():
         print("F1_Score médio distance:", f1_scores[1])
     elif (arg == 'dt'):
         print("DT escolhido")
-        data_base_to_dt = ConverterDataToKNN(data_base)
-        data = SVMBaseSpliter(data_base_to_dt.data)
+        data_base_to_dt = ConvertData(data_base)
+        data = BaseSpliter(data_base_to_dt.data)
         dt = DTTrainer(data)
 
         print("F1_Score médio:", dt.scores.mean())
         print("Desvio padrão:", dt.scores.std())
         print("Matriz de confusão:")
+        dt.plot()
     else:
         print("ARGUMENTO INVÁLIDO!")
 
