@@ -7,7 +7,7 @@ from plot.plot_confusion_matrix import plot_confusion_matrix
 
 class KNNTrainer:
     def __init__(self, dataBase, n_neighbors, weights):
-        print("Treinando KNN...")
+        print("Training KNN...")
         self.knn = KNeighborsClassifier(weights=weights,n_neighbors=n_neighbors)
         self.cv = StratifiedKFold(n_splits=10)
         self.scores = model_selection.cross_val_score(self.knn, dataBase.X, dataBase.Y, cv=self.cv, scoring='f1')

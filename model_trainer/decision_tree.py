@@ -6,7 +6,7 @@ from plot.plot_confusion_matrix import plot_confusion_matrix
 
 class DTTrainer:
     def __init__(self, dataBase) -> None:
-        print("Treinando DT...")
+        print("Training DT...")
         self.svm = DecisionTreeClassifier()
         self.cv = StratifiedKFold(n_splits=10)
         self.scores = model_selection.cross_val_score(self.svm, dataBase.X, dataBase.Y, cv=self.cv, scoring='f1')
