@@ -34,10 +34,19 @@ python3 ./main.py analytic
 
 ```
 
-Para executar o código para executar o KNN basta executar o comando:
+Para executar o código com o KNN basta digitar o comando:
 
 
 ```
 python3 ./main.py knn
+
+```
+
+
+Para executar o código com o SVM basta digitar o comando:
+
+
+```
+python3 ./main.py svm
 
 ```
