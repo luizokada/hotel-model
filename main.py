@@ -18,16 +18,18 @@ def main():
         analytic = DbAnalyser(data_base)
         
     elif(arg == 'knn'):
+        print("KNN\n")
         #Transforma a base de dados em uma base de dados para o KNN convertendo as variáveis categóricas em variáveis numéricas
-        data_base_to_knn = ConvertData(data_base)
+        db = ConvertData(data_base)
 
         #Divide a Base de Dados
-        data_knn = BaseSpliter(data_base_to_knn.data)
+        data_knn = BaseSpliter(db.data)
 
         #treina o KNN
         number_of_neighbors = [1,3,5,7,9,11,13]
-        f1_scores = [[],[]]
         type_of_weight = ['uniform', 'distance']
+        f1_scores = [[],[]]
+
         i=0
         for neighbors in number_of_neighbors:
             i=0
@@ -42,9 +44,8 @@ def main():
                 print("---------------------------------------------------------")
                 knn.plot()
                 i+=1
-                
-        plt.show()
-
+        
+        knn.plot()
         j = f1_scores[0]
         k = f1_scores[1]
 
@@ -64,14 +65,47 @@ def main():
         print("F1_Score médio uniform:", f1_scores[0])
         print("F1_Score médio distance:", f1_scores[1])
     elif (arg == 'dt'):
-        data_base_to_dt = ConvertData(data_base)
-        data = BaseSpliter(data_base_to_dt.data)
-        dt = DTTrainer(data)
+        print("Decision Tree\n")
+        db = ConvertData(data_base)
+        data = BaseSpliter(db.data)
+    
+        max_depths = [30, 40, 50, None]
+        splitters = ['best', 'random']
+        f1_scores = [[],[]]
 
-        print("F1_Score médio:", dt.scores.mean())
-        print("Desvio padrão:", dt.scores.std())
-        print("Matriz de confusão:")
+        i=0
+        for depth in max_depths:
+            i=0
+            for splitter in splitters:
+                print("Profundidade máxima: ", depth)
+                print("Splitter: ", splitter)
+                dt = DTTrainer(data, depth, splitter)
+                f1_scores[i].append(dt.scores.mean())
+                print("F1_Score médio:", dt.scores.mean())
+                print("Desvio padrão:", dt.scores.std())
+                print("Matriz de confusão:")
+                print("---------------------------------------------------------")
+                dt.plot()
+                i+=1
+
         dt.plot()
+        j = f1_scores[0]
+        k = f1_scores[1]
+
+        plt.plot(max_depths,j)
+        plt.title('F1_Score médio Splitter = best')
+        plt.ylabel('F1_Score')
+        plt.xlabel('Max Depths')
+        plt.show()
+
+        plt.plot(max_depths,k)
+        plt.title('F1_Score médio Splitter = random')
+        plt.ylabel('F1_Score')
+        plt.xlabel('Max Depths')
+        plt.show()
+
+        print("F1_Score médio best:", f1_scores[0])
+        print("F1_Score médio random:", f1_scores[1])
     else:
         print("ARGUMENTO INVÁLIDO!")
 
