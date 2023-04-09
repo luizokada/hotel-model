@@ -1,7 +1,5 @@
 import pandas as pd
 from matplotlib import pyplot as plt
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.preprocessing import OrdinalEncoder
 import seaborn as sns
 import matplotlib.pyplot as plt
 
@@ -15,12 +13,12 @@ class DbAnalyser:
         print("---------------------------------------------------------")
         print("Quantidade de valores únicos por coluna:")
         print(pd.DataFrame(values, index=['values count']).transpose())
+
         #COMO NAO USA BOOKING_ID A COLUNA DEVE SER REMOVIDA
         db = db.drop('Booking_ID',axis=1)
         db['booking_status'].value_counts().plot(kind='bar', title='booking_status').set_xticklabels(['Not_Canceled','Canceled'],rotation=0)
         plt.show()
 
-        
         columns_to_exclude = ['avg_price_per_room','lead_time','arrival_date','booking_status']
 
         # Calcula o numero de colunas da figura
@@ -45,6 +43,7 @@ class DbAnalyser:
                 axs[row, col].set_xticklabels(axs[row, col].get_xticklabels(), rotation=0)
                 plot_num += 1
             plt.show()
+            
         #Valores continuos
         sns.scatterplot(data = db, x = 'no_of_adults', y = 'avg_price_per_room',  hue  = 'booking_status')
         plt.show()

@@ -13,9 +13,8 @@ def main():
     data_base = pd.read_csv('./db/HotelReservations.csv')
 
     if(arg == 'analytic'):
-        
         #Faz a analise de dados
-        analytic = DbAnalyser(data_base)
+        DbAnalyser(data_base)
         
     elif(arg == 'knn'):
         print("KNN\n")
